@@ -1,0 +1,22 @@
+{
+  "name": "purescript-example",
+  "version": "1.0.0",
+  "author": "bouzuya <m@bouzuya.net> (http://bouzuya.net/)",
+  "dependencies": {
+    "purescript": "^0.10.1"
+  },
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "pulp": "^9.0.1"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "pulp:build": "pulp build",
+    "pulp:init": "pulp init",
+    "pulp:psci": "pulp psci",
+    "pulp:test": "pulp test",
+    "test": "npm run pulp:test"
+  }
+}
