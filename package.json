@@ -16,6 +16,7 @@
     "pulp:build": "pulp build",
     "pulp:init": "pulp init",
     "pulp:psci": "pulp psci",
+    "pulp:run": "pulp run",
     "pulp:test": "pulp test",
     "test": "npm run pulp:test"
   }
