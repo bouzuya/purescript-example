@@ -1,7 +1,6 @@
 module Main where
 
 import Prelude
-import Data.List
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
 
