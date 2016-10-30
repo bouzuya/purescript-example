@@ -1,4 +1,4 @@
-module Test.Main where
+module Test.Euler where
 
 import Prelude
 
