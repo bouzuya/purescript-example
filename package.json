@@ -13,6 +13,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
+    "pulp:browserify": "pulp browserify",
     "pulp:build": "pulp build",
     "pulp:init": "pulp init",
     "pulp:psci": "pulp psci",
