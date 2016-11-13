@@ -117,6 +117,9 @@ showShape (Line start end) =
   "Line [start: " <> showPoint start <> ", end: " <> showPoint end <> "]"
 showShape (Text loc text) = "Text " <> showPoint loc <> " " <> show text
 
+instance showShape' :: Show Shape where
+  show = showShape
+
 origin :: Point
 origin = Point { x, y }
   where
@@ -202,11 +205,8 @@ shapeBounds (Text (Point { x, y }) _) = Bounds
   , right:  x
   }
 
-bounds :: Picture -> Bounds
-bounds = foldl combine emptyBounds
-  where
-  combine :: Bounds -> Shape -> Bounds
-  combine b shape = shapeBounds shape \/ b
-
-
-
+-- bounds :: Picture -> Bounds
+-- bounds = foldl combine emptyBounds
+--   where
+--   combine :: Bounds -> Shape -> Bounds
+--   combine b shape = shapeBounds shape \/ b
