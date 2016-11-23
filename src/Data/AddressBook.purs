@@ -1,10 +1,10 @@
 module Data.AddressBook where
 
 import Prelude
-
+import Control.Apply (lift2)
 import Control.Plus (empty)
 import Data.List (List(..), filter, head, null, nubBy)
-import Data.Maybe (Maybe)
+import Data.Maybe
 
 type Entry =
   { firstName :: String
@@ -96,3 +96,30 @@ printEntryByStreet street book =
 --   where
 --     filterEntry :: Entry -> Boolean
 --     filterEntry entry = entry.firstName == firstName && entry.lastName == lastName
+
+address :: String -> String -> String -> Address
+address street city state = { street: street, city: city, state: state }
+
+combineList :: forall f a. Applicative f => List (f a) -> f (List a)
+combineList Nil = pure Nil
+combineList (Cons x xs) = Cons <$> x <*> combineList xs
+
+add' :: forall f a. Applicative f => Semiring a => f a -> f a -> f a
+add' x y = lift2 (+) x y
+
+sub' :: forall f a. Applicative f => Ring a => f a -> f a -> f a
+sub' x y = lift2 (-) x y
+
+mul' :: forall f a. Applicative f => Semiring a => f a -> f a -> f a
+mul' x y = lift2 (*) x y
+
+div' :: forall f a. Applicative f => EuclideanRing a => f a -> f a -> f a
+div' x y = lift2 (/) x y
+
+combineMaybe :: forall a f. Applicative f => Maybe (f a) -> f (Maybe a)
+combineMaybe Nothing = pure Nothing
+combineMaybe (Just x) = Just <$> x
+
+-- NOTE
+-- combineMaybe (Just ([1, 2])) -- => [Just 1, Just 2]
+
