@@ -13,8 +13,9 @@ import DOM.HTML.Window (document)
 import DOM.Node.NonElementParentNode (getElementById)
 import DOM.Node.Types (Element, ElementId(..), NonElementParentNode)
 import Partial.Unsafe (unsafePartial)
-import React.DOM as D
 import ReactDOM (render)
+
+import C8Component (component)
 
 getMainElement :: forall eff. HTMLDocument -> Eff (dom :: DOM | eff) Element
 getMainElement htmlDocument = do
@@ -31,7 +32,6 @@ main :: Eff ( console :: CONSOLE
             ) Unit
 main = void do
   log "Rendering address book component"
-  let component = D.div [] [D.text "Hello, World!"]
   w <- window
   d <- document w
   e <- getMainElement d
