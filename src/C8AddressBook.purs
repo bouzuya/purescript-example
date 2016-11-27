@@ -1,12 +1,12 @@
 module C8AddressBook(addressBook) where
 
-import Prelude (($))
-import Control.Applicative (pure)
-import React (ReactClass, Render, createClass, spec)
+import Prelude (($), (<>))
+import Control.Monad (bind, pure)
+import React (ReactClass, Render, createClass, readState, spec)
 import React.DOM as D
 import React.DOM.Props as P
 
-import Data.AddressBook (Person, examplePerson)
+import Data.AddressBook (Address(..), Person(..), examplePerson)
 import Data.AddressBook.Validation (Errors)
 
 newtype AppState = AppState
@@ -28,12 +28,29 @@ initialState = AppState
 --     , state :: ReactState ReadOnly
 --     | eff
 --     ) ReactElement
-render :: forall props state eff. Render props state eff
-render _ctx = do
+render :: forall props eff. Render props AppState eff
+render ctx = do
+  AppState { person: Person person@{ homeAddress: Address address }
+           , errors
+           } <- readState ctx
   pure $
-    D.div
-      [ P.className "address-book" ]
-      [ D.text "AAAAAAAAAA!!!" ]
+    D.div [ P.className "container" ]
+          [ D.div [ P.className "row" ]
+                  [] -- TODO
+          , D.div [ P.className "row" ]
+                  [ D.form [ P.className "form-horizontal" ]
+                           [ D.h3' [ D.text "Basic Information" ]
+                           , D.text ("First Name:" <> person.firstName) -- TODO
+                           , D.text ("Last Name:" <> person.lastName) -- TODO
+                           , D.h3' [ D.text "Address" ]
+                           , D.text ("Street:" <> address.street) -- TODO
+                           , D.text ("City:" <> address.city) -- TODO
+                           , D.text ("State" <> address.state) -- TODO
+                           , D.h3' [ D.text "Contact Information" ]
+                           ]
+                  ]
+          ]
+
 
 -- createClass :: forall props state eff.
 --   ReactSpec props state eff -> ReactClass props
