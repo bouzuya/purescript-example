@@ -1,10 +1,24 @@
 module C8AddressBook(addressBook) where
 
-import Prelude (unit, ($))
+import Prelude (($))
 import Control.Applicative (pure)
 import React (ReactClass, Render, createClass, spec)
 import React.DOM as D
 import React.DOM.Props as P
+
+import Data.AddressBook (Person, examplePerson)
+import Data.AddressBook.Validation (Errors)
+
+newtype AppState = AppState
+  { person :: Person
+  , errors :: Errors
+  }
+
+initialState :: AppState
+initialState = AppState
+  { person: examplePerson
+  , errors: []
+  }
 
 -- type Render props state eff =
 --   ReactThis props state ->
@@ -29,4 +43,4 @@ render _ctx = do
 addressBook :: forall props. ReactClass props
 addressBook = createClass $ spec state render
   where
-    state = unit
+    state = initialState
