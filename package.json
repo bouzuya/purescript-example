@@ -12,8 +12,9 @@
     "purescript": "^0.10.1"
   },
   "keywords": [],
-  "license": "MIT",
+  "license": "UNLICENSED",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "pulp:browserify": "pulp browserify",
     "pulp:build": "pulp build",
